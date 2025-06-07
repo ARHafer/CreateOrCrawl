@@ -1,27 +1,27 @@
-import game.characters.Guard;
-import game.environments.Door;
-import game.environments.Room;
-import game.items.Item;
+import game.MapHandler;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Room room = new Room("Room", "A room.");
-        Guard g1 = new Guard("Guard 1", "The first guard.");
-        Guard g2 = new Guard("Guard 2", "The second guard.");
-        Guard g3 = new Guard("Guard 3", "The third guard.");
-        Door door = new Door("Door", "A door.", true);
-        Item item = new Item("Item", "An item.", 0, true, false);
+        SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+        InputStream mapFile = Main.class.getResourceAsStream("test_input.xml");
 
-        System.out.println(door.inspectString());
-        System.out.println(item.inspectString());
+        try {
+            SAXParser saxParser = saxParserFactory.newSAXParser();
+            MapHandler handler = new MapHandler();
+            saxParser.parse(mapFile, handler);
 
-        // Testing listObjects() method in Room
-        System.out.println(room.inspectString());
-        room.addCharacter(g1);
-        System.out.println(room.inspectString());
-        room.addCharacter(g2);
-        System.out.println(room.inspectString());
-        room.addCharacter(g3);
-        System.out.println(room.inspectString());
+            Scanner scanner = new Scanner(System.in);
+            handler.test(scanner);
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }

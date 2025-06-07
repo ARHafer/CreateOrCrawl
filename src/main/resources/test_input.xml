@@ -1,0 +1,115 @@
+<xml version="1.0" encoding="UTF-8">
+  <!-- Dungeon Floor !-->
+  <room name="Dungeon Cell" description="a dank and dirty cell, with bars on the only door">
+    <door direction="north" other_room="Dungeon Antechamber" name="Cell Door" description="the only door to the cell" locked="false"/>
+    <player name="Aubrey" description="the one who is trying to escape!"/>
+  </room>
+  <room name="Dungeon Antechamber" description="a room with a lone dungeon cell.">
+    <guard name="Sleeping Guard" description="a guard sleeps on a wooden chair in the antechamber." sleeping="true"/>
+    <item name="Wooden Chair" description="the guard is sleeping on this chair, tilted back on two legs against the wall." weight="10" carryable="false" hidden="false">
+      <key name="Dungeon Stair Key" description="A shiny brass key." door="Dungeon Stair Door" weight="0" carryable="true" hidden="true"/>
+    </item>
+    <door direction="south" other_room="Dungeon Cell" name="Cell Door" description="the only door to the cell" locked="false"/>
+    <door direction="east" other_room="Dungeon Stairs" name="Dungeon Stair Door" description="" locked="true"/>
+  </room>
+  <room name="Dungeon Stairs" description="stairs between the dungeon and main floor.">
+    <door direction="west" other_room="Dungeon Antechamber" name="Dungeon Stair Door" description="" locked="true"/>
+    <door direction="north" other_room="Laundry" name="Main Floor Stair Door" description="" locked="false"/>
+  </room>
+  <!-- Main Floor !-->
+  <room name="Laundry" description="a room where the servents do the laundry.">
+    <maid name="Adam" description="a portly fellow doing the laundry." cleaning="true"/>
+    <maid name="Jane" description="a nice young lady taking a break." cleaning="false"/>
+    <door direction="south" other_room="Dungeon Stairs" name="Main Floor Stair Door" description="" locked="false"/>
+    <door direction="north" other_room="Bake House" name="Laundry Door" description="" locked="false"/>
+    <item name="Dirty Laundry Pile" description="" weight="100" carryable="true" hidden="false">
+      <key name="Housekeeper's Chambers Key" description="A shiny brass key." door="Housekeeper's Door" weight="0" carryable="true" hidden="true"/>
+      <item name="Dirty Slacks" description="Some dirty pants" weight="3" carryable="true" hidden="true"/>
+    </item>
+    <item name="Washbucket" description="" weight="10" carryable="true" hidden="false"/>
+  </room>
+  <room name="Bake House" description="where all the baked goods for the castle are made.">
+    <maid name="Jim" description="a cook baking some bread." cleaning="true"/>
+    <item name="Fireplace" description="a large fireplace where bed is being baked." weight="100000" carryable="false" hidden="false"/>
+    <door direction="south" other_room="Laundry" name="Laundry Door" description="" locked="false"/>
+    <door direction="north" other_room="Brew House" name="Brew House Door" description="" locked="false"/>
+    <door direction="west" other_room="Butler Pantry" name="Pantry Door" description="" locked="false"/>
+  </room>
+  <room name="Butler Pantry" description="storage for the needs of the Bake House and Brew House.">
+    <item name="Shelves" description="many shelves filled with the needs for baking." weight="1000" carryable="false" hidden="false"/>
+    <door direction="east" other_room="Bake House" name="Pantry Door" description="" locked="false"/>
+  </room>
+  <room name="Brew House" description="where the ale for the castle is made.">
+    <door direction="south" other_room="Bake House" name="Brew House Door" description="" locked="false"/>
+    <door direction="north" other_room="Ale Cellar" name="Ale Cellar Door" description="" locked="false"/>
+  </room>
+  <room name="Ale Cellar" description="storage for ale.">
+    <item name="Stack of Barrels" description="a large stack of barrels containing ale." weight="10000" carryable="false" hidden="false"/>
+    <door direction="south" other_room="Brew House" name="Ale Cellar Door" description="" locked="false"/>
+    <door direction="east" other_room="Great Parlor" name="Parlor West Door" description="" locked="false"/>
+  </room>
+  <room name="Great Parlor" description="the place where all of the rich folk do whatever they do in a parlor.">
+    <door direction="west" other_room="Ale Cellar" name="Parlor West Door" description="" locked="false"/>
+    <door direction="south" other_room="Great Hall" name="Parlor Door" description="" locked="false"/>
+  </room>
+  <room name="Great Hall" description="a large room with tables set for a large feast.">
+    <maid name="Zander" description="a maid washes the tables." cleaning="true"/>
+    <door direction="north" other_room="Great Parlor" name="Parlor Door" description="" locked="false"/>
+    <door direction="south" other_room="Guard Room" name="Guard Room Door" description="" locked="false"/>
+    <door direction="east" other_room="Grand Staircase" name="Great Hall Door" description="" locked="false"/>
+  </room>
+  <room name="Guard Room" description="a room where guards can keep and eye on the entry to the castle.">
+    <guard name="Alonzo" description="a guard staring out the window." sleeping="false"/>
+    <guard name="Bethany" description="a guard looking toward the main entrance." sleeping="false"/>
+    <door direction="north" other_room="Great Hall" name="Guard Room Door" description="" locked="false"/>
+    <door direction="east" other_room="Main Entry" name="Main Entry Door" description="" locked="false"/>
+    <item name="Small Table" description="" weight="100" carryable="false" hidden="false"/>
+    <item name="Key Holder" description="a small cabinet where keys can be stored." weight="100" carryable="false" hidden="false">
+      <key name="Upper Floor Key" description="A shiny brass key." door="Gallery Door" weight="0" carryable="true" hidden="true"/>
+    </item>
+  </room>
+  <room name="Main Entry" description="main entry to the castle.">
+    <door direction="south" other_room="Exit" name="Exit Door" description="" locked="true"/>
+    <door direction="west" other_room="Guard Room" name="Main Entry Door" description="" locked="false"/>
+    <item name="Chandelier" description="a large chandelier hangs from the ceiling." weight="100" carryable="false" hidden="false"/>
+  </room>
+  <room name="Exit" description="">
+    <door direction="north" other_room="Main Entry" name="Exit Door" description="" locked="false"/>
+  </room>
+  <room name="Grand Staircase" description="a large wooden staircase to the second level of the castle.">
+    <door direction="west" other_room="Great Hall" name="Great Hall Door" description="" locked="false"/>
+    <door direction="north" other_room="Gallery" name="Gallery Door" description="" locked="true"/>
+  </room>
+  <!-- Upper Floor !-->
+  <room name="Gallery" description="">
+    <door direction="south" other_room="Grand Staircase" name="Gallery Door" description="" locked="true"/>
+    <door direction="north" other_room="Lady's Apartment" name="Lady's Apartment Door" description="" locked="true"/>
+    <door direction="west" other_room="Housekeeper's Chambers" name="Housekeeper's Door" description="" locked="true"/>
+  </room>
+  <room name="Lady's Apartment" description="">
+    <maid name="Pam" description="a maid cleaning the curtains." cleaning="true"/>
+    <door direction="south" other_room="Gallery" name="Lady's Apartment Door" description="" locked="true"/>
+    <door direction="north" other_room="Lady's Sitting Room" name="Sitting Room Door" description="" locked="false"/>
+    <door direction="west" other_room="Lady's Bath" name="Bath Door" description="" locked="false"/>
+  </room>
+  <room name="Lady's Bath" description="">
+    <door direction="east" other_room="Lady's Apartment" name="Bath Door" description="" locked="false"/>
+  </room>
+  <room name="Lady's Sitting Room" description="">
+    <door direction="south" other_room="Lady's Apartment" name="Sitting Room Door" description="" locked="false"/>
+    <item name="Tea Table" description="" weight="100" carryable="false" hidden="false">
+      <key name="Exit Key" description="A shiny brass key." door="Exit Door" weight="0" carryable="true" hidden="true"/>
+    </item>
+  </room>
+  <room name="Housekeeper's Chambers" description="">
+    <maid name="Sam" description="a maid taking a rest on the soft bed." cleaning="false"/>
+    <door direction="east" other_room="Gallery" name="Housekeeper's Door" description="" locked="true"/>
+    <item name="Soft Bed" description="" weight="100" carryable="false" hidden="false">
+    </item>
+    <item name="Hard Bed" description="" weight="100" carryable="false" hidden="false">
+    </item>
+    <item name="Nightstand" description="" weight="100" carryable="false" hidden="false">
+      <key name="Lady's Apartment Key" description="A shiny brass key." door="Lady's Apartment Door" weight="0" carryable="true" hidden="true"/>
+    </item>
+  </room>
+</xml>

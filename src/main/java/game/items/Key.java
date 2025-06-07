@@ -1,9 +1,9 @@
 package game.items;
 
 public class Key extends Item {
-    private String door; // String representation of the door the key unlocks.
+    private final String door; // String representation of the door the key unlocks.
 
-    public Key(String name, String description, boolean hidden, String door) {
+    public Key(String name, String description, String door, boolean hidden) {
         super(name, description, 0, true, hidden); // Keys are always weightless and carriable.
         this.door = door;
     }

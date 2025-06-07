@@ -1,12 +1,21 @@
 package game.characters;
 
 public class Maid extends NPC {
-    public Maid(String name, String description) {
+    private boolean cleaning;
+
+    public Maid(String name, String description, boolean cleaning) {
         super(name, description);
+        this.cleaning = cleaning;
     }
 
     @Override
     public String inspectString() {
-        return "\n<" + name + ">\n" + description + "\n";
+        String cleaningString = "";
+
+        if (cleaning) {
+            cleaningString = "(Cleaning)";
+        }
+
+        return "\n<" + name + "> " + cleaningString + "\n" + description + "\n";
     }
 }

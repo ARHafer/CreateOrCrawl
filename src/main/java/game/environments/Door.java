@@ -34,4 +34,12 @@ public class Door implements Inspectable {
             room2 = room;
         }
     }
+
+    public Room getOtherRoom(Room room) {
+        if (room1 == room) {
+            return room2;
+        } else {
+            return room1;
+        }
+    }
 }
