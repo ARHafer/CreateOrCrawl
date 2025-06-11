@@ -1,4 +1,5 @@
 import game.MapHandler;
+import game.characters.Player;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,7 +20,9 @@ public class Main {
             saxParser.parse(mapFile, handler);
 
             Scanner scanner = new Scanner(System.in);
-            handler.test(scanner);
+            Player player = handler.getPlayer();
+            player.play(scanner);
+
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }

@@ -27,12 +27,16 @@ public class Door implements Inspectable {
     }
 
     // Setters & Getters //
-    protected void setRoom(Room room) { // Protected as this is only used in Room.
+    void setRoom(Room room) { // Package-private as this is only used in Room.
         if (room1 == null) {
             room1 = room;
         } else {
             room2 = room;
         }
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
 
     public Room getOtherRoom(Room room) {
@@ -41,5 +45,13 @@ public class Door implements Inspectable {
         } else {
             return room1;
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isLocked() {
+        return locked;
     }
 }

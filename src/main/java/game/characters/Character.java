@@ -10,14 +10,4 @@ public abstract class Character implements Inspectable {
     public Character(String name) {
         this.name = name;
     }
-
-    // Setters & Getters //
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
 }
