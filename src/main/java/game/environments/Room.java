@@ -61,7 +61,7 @@ public class Room implements Inspectable {
                 + listObjects("Item", itemNames) + "\n" + listDoors() + "\n";
     }
 
-    private StringBuilder listObjects(String objectName, ArrayList<?> objects) {
+    private StringBuilder listObjects(String objectName, ArrayList<String> objects) {
         StringBuilder list = new StringBuilder();
         int size = objects.size();
 

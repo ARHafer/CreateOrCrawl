@@ -1,9 +1,8 @@
 package game.characters;
 
-import game.Inspectable;
 import game.environments.Room;
 
-public abstract class Character implements Inspectable {
+public abstract class Character {
     protected final String name;
     protected Room room;
 

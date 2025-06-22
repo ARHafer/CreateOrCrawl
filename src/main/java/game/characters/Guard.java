@@ -1,18 +1,15 @@
 package game.characters;
 
 public class Guard extends NPC {
-    private boolean sleeping;
-
-    public Guard(String name, String description, boolean sleeping) {
-        super(name, description);
-        this.sleeping = sleeping;
+    public Guard(String name, String description, boolean distracted) {
+        super(name, description, distracted);
     }
 
     @Override
     public String inspectString() {
         String sleepString = "";
         
-        if (sleeping) {
+        if (distracted) {
             sleepString = "(Sleeping)";
         }
         

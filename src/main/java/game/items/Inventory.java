@@ -41,7 +41,7 @@ public class Inventory {
         items.remove(item.getName().toLowerCase());
         itemNames.remove(item.getName());
 
-        System.out.println("\nYou drop the " + item.getName() + ". Goodbye " + item.getName() + "!\n");
+        System.out.println("\nYou drop the " + item.getName() + ". Goodbye, " + item.getName() + "!\n");
     }
 
     public Item get(String itemName) {
@@ -54,16 +54,28 @@ public class Inventory {
 
     @Override
     public String toString() {
-        return "\n<Bag> (" + currentWeight + "/25 lbs.)" + listItems() + "\n\n<Keychain>" + listKeys();
+        return "\n<Bag> (" + currentWeight + "/" + MAX_WEIGHT + " lbs)" + listItems() + "\n\n<Keychain>" + listKeys() + "\n";
     }
 
     private StringBuilder listItems() {
         StringBuilder list = new StringBuilder();
+        ArrayList<String> onlyItems = new ArrayList<>();
 
-        for (String name : itemNames) {
-            Item item = items.get(name.toLowerCase());
+        if (itemNames.isEmpty()) {
+            list.append("\n   *Empty*");
+        } else {
+            for (String name : itemNames) {
+                Item item = items.get(name.toLowerCase());
 
-            list.append("\n - ").append(name).append("(").append(item.weightString()).append(")");
+                if (!(item instanceof Key)) {
+                    onlyItems.add(name);
+                    list.append("\n - ").append(name).append(" (").append(item.weightString()).append(")");
+                }
+            }
+
+            if (onlyItems.isEmpty()) {
+                list.append("\n   *Empty*");
+            }
         }
 
         return list;
@@ -71,12 +83,22 @@ public class Inventory {
 
     private StringBuilder listKeys() {
         StringBuilder list = new StringBuilder();
+        ArrayList<String> onlyKeys = new ArrayList<>();
 
-        for (String name : itemNames) {
-            Item item = items.get(name.toLowerCase());
+        if (itemNames.isEmpty()) {
+            list.append("\n   *Empty*");
+        } else {
+            for (String name : itemNames) {
+                Item item = items.get(name.toLowerCase());
 
-            if (item instanceof Key) {
-                list.append("\n - ").append(name).append("(").append(item.weightString()).append(")");
+                if (item instanceof Key) {
+                    onlyKeys.add(name);
+                    list.append("\n - ").append(name);
+                }
+            }
+
+            if (onlyKeys.isEmpty()) {
+                list.append("\n   *Empty*");
             }
         }
 

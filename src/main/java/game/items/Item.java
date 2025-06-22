@@ -34,9 +34,9 @@ public class Item implements Inspectable {
         String weightString;
 
         if (weight > 1) {
-            weightString = weight + " lbs.";
+            weightString = weight + " lbs";
         } else if (weight == 1) {
-            weightString = weight + " lb.";
+            weightString = weight + " lb";
         } else {
             weightString = "Weightless";
         }

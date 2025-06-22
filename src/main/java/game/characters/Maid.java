@@ -1,18 +1,15 @@
 package game.characters;
 
 public class Maid extends NPC {
-    private boolean cleaning;
-
-    public Maid(String name, String description, boolean cleaning) {
-        super(name, description);
-        this.cleaning = cleaning;
+    public Maid(String name, String description, boolean distracted) {
+        super(name, description, distracted);
     }
 
     @Override
     public String inspectString() {
         String cleaningString = "";
 
-        if (cleaning) {
+        if (distracted) {
             cleaningString = "(Cleaning)";
         }
 

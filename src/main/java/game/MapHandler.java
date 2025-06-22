@@ -78,10 +78,9 @@ public class MapHandler extends DefaultHandler {
             case "key" -> {
                 String name = attributes.getValue("name");
                 String description = attributes.getValue("description");
-                int weight = Integer.parseInt(attributes.getValue("weight"));
                 String door = attributes.getValue("door");
 
-                Key key = new Key(name, description, weight, door);
+                Key key = new Key(name, description, door);
 
                 if (itemStack.isEmpty()) {
                     currentRoom.addItem(key);
@@ -116,6 +115,7 @@ public class MapHandler extends DefaultHandler {
 
                 player = new Player(name);
                 player.setRoom(currentRoom);
+                player.setStartingRoom(currentRoom);
             }
         }
     }
