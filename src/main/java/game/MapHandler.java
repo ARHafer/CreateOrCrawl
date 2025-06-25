@@ -1,17 +1,27 @@
 package game;
 
-import game.characters.Guard;
-import game.characters.Maid;
-import game.characters.Player;
-import game.environments.Door;
-import game.environments.Room;
-import game.items.Item;
-import game.items.Key;
+/*
+ * Parses a .xml file containing information stored in elements about the game map and the objects within.
+ * Converts the .xml elements into in-game objects, creating rooms and populating them with their respective objects.
+ */
+
+import game.objects.characters.Guard;
+import game.objects.characters.Maid;
+import game.objects.characters.Player;
+import game.objects.environments.Door;
+import game.objects.environments.Room;
+import game.objects.items.Item;
+import game.objects.items.Key;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.HashMap;
 import java.util.Stack;
+
+/*
+  TODO:
+   - Keep class updated as new elements and parameters are added to the map file.
+ */
 
 public class MapHandler extends DefaultHandler {
     private final HashMap<String, Room> rooms = new HashMap<>();
@@ -115,7 +125,7 @@ public class MapHandler extends DefaultHandler {
 
                 player = new Player(name);
                 player.setRoom(currentRoom);
-                player.setStartingRoom(currentRoom);
+                player.setStart(currentRoom);
             }
         }
     }

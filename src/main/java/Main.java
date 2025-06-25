@@ -1,5 +1,6 @@
 import game.MapHandler;
-import game.characters.Player;
+import game.core.GameLoop;
+import game.objects.characters.Player;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -8,6 +9,22 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
+
+/*
+  TODO (In order of addition):
+   1. Combat System
+        - Add "BattleManager" class.
+        - Add "Enemy" class.
+        - Add "Weapon" class.
+        - Implement player & enemy stats.
+   2. Door/Lock Variants
+        - Add "RiddleDoor", "ItemDoor", "LeverDoor", & "EnemyDoor" classes.
+        - or -
+        - Add "RiddleLock", "ItemLock", "LeverLock", & "EnemyLock" classes.
+   3. Save/Load System
+   4. GUI w/ Minimap
+   5. Dungeon Editor
+ */
 
 public class Main {
     public static void main(String[] args) {
@@ -21,8 +38,9 @@ public class Main {
 
             Scanner scanner = new Scanner(System.in);
             Player player = handler.getPlayer();
-            player.play(scanner);
+            GameLoop game = new GameLoop(player);
 
+            game.play(scanner);
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }

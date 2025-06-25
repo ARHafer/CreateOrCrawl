@@ -1,7 +1,18 @@
-package game.items;
+package game.objects.items;
+
+/*
+ * Represents player's inventory. Handles the addition and removal of items while enforcing a maximum weight limit.
+ */
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+/*
+  TODO:
+   - Refactor inventory class to be used by both the player and NPCs.
+   - Make MAX_WEIGHT dynamic, changing based on the strength stat of the player or NPC.
+       - e.g. ((STRENGTH + 1) / 2) * 15
+ */
 
 public class Inventory {
     private final HashMap<String, Item> items; // Since item names are entered in lowercase...

@@ -1,7 +1,12 @@
-package game.items;
+package game.objects.items;
+
+/*
+ * Represents in-game items the player can pick up and inspect. Items may contain subitems which are revealed and added
+ * to the room upon inspection.
+ */
 
 import game.Inspectable;
-import game.environments.Room;
+import game.objects.environments.Room;
 
 import java.util.ArrayList;
 
@@ -44,10 +49,6 @@ public class Item implements Inspectable {
         return weightString;
     }
 
-    /*
-     * Because of how subitems are handled here (added to the room after their superitem is inspected), the "hidden"
-     * variable is no longer needed.
-     */
     private StringBuilder handleSubitems() {
         StringBuilder list = new StringBuilder();
 

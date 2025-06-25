@@ -1,6 +1,16 @@
-package game.environments;
+package game.objects.environments;
+
+/*
+ * Represents doors which connect two rooms. Doors can be locked, requiring a key to enter.
+ */
 
 import game.Inspectable;
+
+/*
+  TODO:
+   - Implement other door/lock types that are unlocked via means other than a key.
+        - e.g. Riddles (Either typed answer or item matching), switches in other rooms, clearing the room of enemies, etc.
+ */
 
 public class Door implements Inspectable {
     private final String name, description;

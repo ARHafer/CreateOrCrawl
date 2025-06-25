@@ -1,7 +1,16 @@
-package game.characters;
+package game.objects.characters;
+
+/*
+ * Contains methods & variables used by all NPCs.
+ */
 
 import game.Inspectable;
-import game.environments.Room;
+import game.objects.environments.Room;
+
+/*
+  TODO:
+   - Delete this class, as in future versions there will only be a single NPC class (Enemy).
+ */
 
 public abstract class NPC extends Character implements Inspectable {
     protected final String description;
@@ -13,7 +22,7 @@ public abstract class NPC extends Character implements Inspectable {
         this.distracted = distracted;
     }
 
-    protected void attemptCapture(Player player) {
+    public void attemptCapture(Player player) {
         int rng = (int)(Math.random() * 100) + 1;
 
         // 20% chance for the player to be caught, assuming the NPC is not distracted.

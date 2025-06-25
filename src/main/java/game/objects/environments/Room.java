@@ -1,10 +1,15 @@
-package game.environments;
+package game.objects.environments;
+
+/*
+ * Represents an individual room the player will explore. Every room also houses NPCs and items. Rooms are connected
+ * via doors in the four cardinal directions.
+ */
 
 import game.Inspectable;
-import game.characters.Guard;
-import game.characters.Maid;
-import game.characters.NPC;
-import game.items.Item;
+import game.objects.characters.Guard;
+import game.objects.characters.Maid;
+import game.objects.characters.NPC;
+import game.objects.items.Item;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,9 @@
-package game.items;
+package game.objects.items;
+
+/*
+ * Represents a key that can unlock a given door. Keys are a specialized type of item, they are weightless, always
+ * carriable, and cannot contain subitems.
+ */
 
 public class Key extends Item {
     private final String door; // String representation of the door the key unlocks.

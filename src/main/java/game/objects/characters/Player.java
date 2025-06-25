@@ -1,21 +1,24 @@
-package game.characters;
+package game.objects.characters;
 
-import game.environments.Door;
-import game.environments.Room;
-import game.items.Inventory;
-import game.items.Item;
-import game.items.Key;
+/*
+ * Represents the player character. Manages the player's health, inventory, and actions.
+ */
+
+import game.objects.environments.Door;
+import game.objects.environments.Room;
+import game.objects.items.Inventory;
+import game.objects.items.Item;
+import game.objects.items.Key;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Player extends Character {
     private int health;
-    private Room startingRoom;
     private final Inventory inventory;
-    private HashMap<String, Guard> guards;
-    private HashMap<String, Maid> maids;
-    private HashMap<String, Item> items;
+    private HashMap<String, Guard> guards; //
+    private HashMap<String, Maid> maids;   // Cached data from the Room class for easy access
+    private HashMap<String, Item> items;   //
+    private Room start;
 
     private static final String[] DIRECTIONS = {"north", "south", "east", "west"};
     private static final String EXIT = "Exit";
@@ -24,72 +27,6 @@ public class Player extends Character {
         super(name);
         health = 5;
         inventory = new Inventory();
-    }
-
-    public void play(Scanner scanner) {
-        System.out.println("""
-                
-                Welcome to "Create or Crawl - Version 0.1.0-alpha"
-                
-                You were recently arrested for rustling your neighbor's sheep - a crime punished by life in the Imperial
-                Dungeon. Although you're expected to spend the rest of your life in a dimly lit cell eating stale bread
-                and gruel, you have bigger aspirations. Armed with nothing but a makeshift bag and keychain, you begin
-                your text based escape.
-                
-                To begin, type "help" to view a list of all valid commands.
-                """);
-
-        while (!winConditionMet()) {
-            System.out.print("> ");
-            String command = scanner.nextLine().toLowerCase().trim();
-
-            processCommand(command);
-        }
-
-        System.exit(0);
-    }
-
-    private void processCommand(String command) {
-        if (command.equals("help")) {
-            System.out.println(help());
-        } else if (command.equals("look")) {
-            System.out.println(room.inspectString());
-        } else if (command.equals("north") || command.equals("south") || command.equals("east") || command.equals("west")) {
-            enterDoor(command);
-        } else if (command.startsWith("inspect")) {
-            inspect(command);
-        } else if (command.startsWith("unlock")) {
-            unlock(command);
-        } else if (command.startsWith("pickup")) {
-            pickup(command);
-        } else if (command.startsWith("drop")) {
-            drop(command);
-        } else if (command.equals("bag")) {
-            System.out.println(inventory);
-        } else if (command.equals("status")) {
-            System.out.println(this);
-        } else if (command.equals("quit") || command.equals("exit")) {
-            System.out.println("\nExiting the game...\n");
-            System.exit(0);
-        } else {
-            System.out.println("\n\"" + command + "\" is not a recognized command. Type \"help\" to view a list of all valid commands.\n");
-        }
-    }
-
-    private boolean winConditionMet() {
-        if (room.getName().equals(EXIT)) {
-            System.out.println("""
-                    
-                    Stepping through the door, you're met with a ray of sunshine - something you thought you'd never see
-                    again. You run off into the distance a free man, swearing to live the rest of your days on the right
-                    side of the law.
-                    
-                    \t\t\t\t\tCONGRATULATIONS - YOU WIN!
-                    """);
-            return true;
-        }
-
-        return false;
     }
 
     protected void handleCapture() {
@@ -111,7 +48,7 @@ public class Player extends Character {
                 System.out.println("Remaining " + displayHealthBar() + "\n");
             }
 
-            setRoom(startingRoom);
+            setRoom(start);
         } else {
             System.out.println("""
                     
@@ -126,7 +63,7 @@ public class Player extends Character {
         }
     }
 
-    private void enterDoor(String direction) {
+    public void enterDoor(String direction) {
         Door door = room.getDoor(direction);
 
         if (door == null) {
@@ -141,7 +78,7 @@ public class Player extends Character {
         }
     }
 
-    private void inspect(String input) {
+    public void inspect(String input) {
         if (!input.contains(":")) {
             System.out.println("""
                     
@@ -206,7 +143,7 @@ public class Player extends Character {
         }
     }
 
-    private void unlock(String input) {
+    public void unlock(String input) {
         if (!input.contains(":")) {
             System.out.println("""
                     
@@ -261,7 +198,7 @@ public class Player extends Character {
         }
     }
 
-    private void pickup(String input) {
+    public void pickup(String input) {
         if (!input.contains(":")) {
             System.out.println("""
                     
@@ -288,7 +225,7 @@ public class Player extends Character {
         }
     }
 
-    private void drop(String input) {
+    public void drop(String input) {
         if (!input.contains(":")) {
             System.out.println("""
                     
@@ -311,6 +248,23 @@ public class Player extends Character {
         }
     }
 
+    public boolean hasEscaped() {
+        if (room.getName().equals(EXIT)) {
+            System.out.println("""
+                    
+                    Stepping through the door, you're met with a ray of sunshine - something you thought you'd never see
+                    again. You run off into the distance a free man, swearing to live the rest of your days on the right
+                    side of the law.
+                    
+                    \t\t\t\t\tCONGRATULATIONS - YOU WIN!
+                    """);
+            return true;
+        }
+
+        return false;
+    }
+
+
     @Override
     public String toString() {
         return "\n<" + name + ">\n" + displayHealthBar() + "\n";
@@ -332,22 +286,6 @@ public class Player extends Character {
         return healthBar;
     }
 
-    private static String help() {
-        return """
-                
-                <Commands>
-                "Look" ------------------------------ Output the information of the room you're currently in.
-                "North" / "East" / "South" / "West" - Enter a door in the corresponding direction.
-                "Inspect: [Object]" ----------------- Inspect a guard, maid, item, or door to learn more about it!
-                "Unlock: [Door]" -------------------- Unlock a given door, assuming you have the key.
-                "Pickup: [Item]" -------------------- Pick up a given item, adding it to your inventory and removing it from the room.
-                "Drop: [Item]" ---------------------- Drop a given item, removing it from your inventory and adding it to the room.
-                "Bag" ------------------------------- View your inventory.
-                "Status" ---------------------------- View your current health.
-                "Quit" / "Exit" --------------------- Exit the game.
-                """;
-    }
-
     // Setters & Getters //
     public void setRoom(Room room) {
         this.room = room;
@@ -357,7 +295,15 @@ public class Player extends Character {
         items = room.getItems();
     }
 
-    public void setStartingRoom(Room room) {
-        startingRoom = room;
+    public void setStart(Room room) {
+        start = room;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 }
