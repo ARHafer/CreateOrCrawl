@@ -24,7 +24,7 @@ At this stage of development, this project is the final, feature-complete versio
     - Includes custom enemy & puzzle creation.
 ---
 ## Download & Play
-1) Download the pre-release `.jar` file is available under [Releases](https://github.com/ARHafer/CreateOrCrawl/releases).
+1) Download the pre-release `.jar` file, which is available under [Releases](https://github.com/ARHafer/CreateOrCrawl/releases).
 
 2) Open command prompt, navigate to the location of the downloaded `.jar` file, and enter:
    ```bash

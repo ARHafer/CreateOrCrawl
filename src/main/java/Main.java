@@ -1,4 +1,4 @@
-import game.MapHandler;
+import game.util.MapHandler;
 import game.core.GameLoop;
 import game.objects.characters.Player;
 import org.xml.sax.SAXException;

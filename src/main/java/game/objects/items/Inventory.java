@@ -4,6 +4,8 @@ package game.objects.items;
  * Represents player's inventory. Handles the addition and removal of items while enforcing a maximum weight limit.
  */
 
+import game.util.TextBank;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,14 +38,14 @@ public class Inventory {
                                  // so that it can remove it from the room.
 
             if (item instanceof Key) {
-                System.out.println("\nYou slip the " + item.getName() + " onto your keychain.\n");
+                TextBank.FeedbackText.keyPickup(item.getName());
             } else {
-                System.out.println("\nYou stuff the " + item.getName() + " into your bag.\n");
+                TextBank.FeedbackText.itemPickup(item.getName());
             }
         } else if (item.getWeight() + currentWeight > MAX_WEIGHT && item.isCarriable()) {
-            System.out.println("\nYou're lugging around too much to pick that up! Drop something to lighten your load!\n");
+            TextBank.ErrorText.overMaxWeight();
         } else if (!item.isCarriable() || item.getWeight() > MAX_WEIGHT) {
-            System.out.println("\nThat thing is far too heavy to even think about carrying around!\n");
+            TextBank.ErrorText.tooHeavy();
         }
     }
 
@@ -52,7 +54,7 @@ public class Inventory {
         items.remove(item.getName().toLowerCase());
         itemNames.remove(item.getName());
 
-        System.out.println("\nYou drop the " + item.getName() + ". Goodbye, " + item.getName() + "!\n");
+        TextBank.FeedbackText.itemDrop(item.getName());
     }
 
     public Item get(String itemName) {

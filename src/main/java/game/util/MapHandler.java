@@ -1,4 +1,4 @@
-package game;
+package game.util;
 
 /*
  * Parses a .xml file containing information stored in elements about the game map and the objects within.
